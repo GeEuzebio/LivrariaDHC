@@ -4,20 +4,20 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Bem-vindo ao Sistema da Biblioteca</h1>
+    <h1 class="display-4" style="font-weight: 400">Bem-vindo ao Sistema da Biblioteca</h1>
     <div class="col-md-6" style="margin: 20px auto">
         <form asp-action="Search" method="post">
-            <label>Search for a Book</label>
+            <label style="font-weight: bold">Pesquise por um livro</label>
             <div style="display: flex; flex-direction: row; align-items: center;">
                 <input name="title" type="search" class="input-group input-group-lg" />
-                <input type="submit" value="Search" class="btn btn-dark" style="padding:.2rem 0.75rem" />
+                <input type="submit" value="Buscar" class="btn btn-dark" style="padding:.2rem 0.75rem" />
             </div>
         </form>
     </div>
     <div class="col-md-8" style="margin: 20px auto">
         @if (Model == null || !Model.Any())
         {
-            <p>No books found</p>
+            <p style="font-weight: bold">Nenhum livro encontrado!</p>
         }
         else
         {
@@ -172,5 +172,8 @@
                 </tbody>
             </table>
         }
+    </div>
+    <div style="display:flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 70px">
+        <img src="/images/dhc-icon.png" alt="DHC Icon" style="position: absolute; z-index: -1; opacity: 0.3;"/>
     </div>
 </div>

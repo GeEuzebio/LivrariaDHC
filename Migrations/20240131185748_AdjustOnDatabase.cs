@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LibraryApp.Migrations
 {
     /// <inheritdoc />
-    public partial class AdjustOnDatabases : Migration
+    public partial class AdjustOnDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

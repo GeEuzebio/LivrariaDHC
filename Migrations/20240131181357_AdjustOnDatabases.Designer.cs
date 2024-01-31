@@ -9,18 +9,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace LibraryApp.Data.Migrations
+namespace LibraryApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231230212545_BookAndUserAlterTable")]
-    partial class BookAndUserAlterTable
+    [Migration("20240131181357_AdjustOnDatabases")]
+    partial class AdjustOnDatabases
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -36,21 +36,23 @@ namespace LibraryApp.Data.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Edition")
+                    b.Property<string>("Register")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Reserved")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Year")
-                        .HasColumnType("int");
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("BookId");
 
@@ -65,11 +67,14 @@ namespace LibraryApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("BookTitle")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("BookId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("InitialDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDevolved")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastDate")
                         .HasColumnType("datetime2");
@@ -110,6 +115,31 @@ namespace LibraryApp.Data.Migrations
                     b.ToTable("Employer");
                 });
 
+            modelBuilder.Entity("LibraryApp.Models.Reservation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("BookId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("InitialDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reservation");
+                });
+
             modelBuilder.Entity("LibraryApp.Models.User", b =>
                 {
                     b.Property<long>("UserId")
@@ -118,14 +148,26 @@ namespace LibraryApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserId"));
 
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasBorrow")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasReservation")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("SIGE")
+                        .HasColumnType("bigint");
 
                     b.HasKey("UserId");
 

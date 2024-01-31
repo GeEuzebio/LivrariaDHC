@@ -1,0 +1,1 @@
+web: dotnet LibraryApp.dll

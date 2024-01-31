@@ -4,33 +4,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Books' Control</h1>
+<h1>Controle de Livros</h1>
 
 <p>
-    <a asp-action="Create"><input type="button" value="Add New" class="btn btn-success" /></a>
+    <a asp-action="Create"><input type="button" value="Cadastra Livro" class="btn btn-success" /></a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Título
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Gênero
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
+                Autor
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Year)
+                Registro
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Edition)
+                Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                Reservado
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -40,24 +39,23 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Genre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Year)
+                @Html.DisplayFor(modelItem => item.Register)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Edition)
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Edition)
+                @Html.DisplayFor(modelItem => item.Reserved)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.BookId"><input type="button" value="Edit" class="btn btn-warning" /></a>
-                    <a asp-action="Details" asp-route-id="@item.BookId"><input type="button" value="Detail" class="btn btn-info" /></a>
-                    <a asp-action="Delete" asp-route-id="@item.BookId"><input type="button" value="Delete" class="btn btn-danger" /></a>
+                    <a asp-action="Edit" asp-route-id="@item.BookId"><input type="button" value="Editar" class="btn btn-warning" /></a>
+                    <a asp-action="Delete" asp-route-id="@item.BookId"><input type="button" value="Remover" class="btn btn-danger" /></a>
             </td>
         </tr>
 }

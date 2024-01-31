@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace LibraryApp.Data.Migrations
+namespace LibraryApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -17,10 +17,10 @@ namespace LibraryApp.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.20")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("LibraryApp.Models.Book", b =>
                 {
@@ -28,15 +28,15 @@ namespace LibraryApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BookId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("BookId"));
 
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Edition")
+                    b.Property<string>("Register")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Reserved")
@@ -51,9 +51,6 @@ namespace LibraryApp.Data.Migrations
                     b.Property<long?>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("Year")
-                        .HasColumnType("int");
-
                     b.HasKey("BookId");
 
                     b.ToTable("Book");
@@ -65,7 +62,7 @@ namespace LibraryApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("BookId")
                         .HasColumnType("bigint");
@@ -93,7 +90,7 @@ namespace LibraryApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -121,7 +118,7 @@ namespace LibraryApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("BookId")
                         .HasColumnType("bigint");
@@ -146,7 +143,10 @@ namespace LibraryApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserId"));
+
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -162,6 +162,9 @@ namespace LibraryApp.Data.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("SIGE")
+                        .HasColumnType("bigint");
 
                     b.HasKey("UserId");
 
@@ -201,7 +204,7 @@ namespace LibraryApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -291,7 +294,7 @@ namespace LibraryApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");

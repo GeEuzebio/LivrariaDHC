@@ -15,22 +15,22 @@
         <form asp-action="CreateReservation">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Title" class="control-label">Book's Title</label>
+                <label asp-for="@Model.Title" class="control-label">Título</label>
                 <input asp-for="@Model.Title" class="form-control" value="@Model.Title" readonly />
                 <span validation-for="BookTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Author" class="control-label">Author</label>
+                <label asp-for="@Model.Author" class="control-label">Autor</label>
                 <input asp-for="@Model.Author" class="form-control" value="@Model.Author" readonly />
                 <span validation-for="Autor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="InitialDate" class="control-label">Initial Date</label>
+                <label for="InitialDate" class="control-label">Data Inicial</label>
                 <input name="InitialDate" class="form-control" value=@initialDate.Value.Date readonly />
                 <span validation-for="InitialDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="LastDate" class="control-label">Final Date</label>
+                <label for="LastDate" class="control-label">Data Final</label>
                 <input name="LastDate" class="form-control" value=@initialDate.Value.AddDays(2).Date readonly />
                 <span validation-for="LastDate" class="text-danger"></span>
             </div>
@@ -40,7 +40,7 @@
                     <input name="BookId" value="@Model.BookId" style="display:none" />
                     <input name="BookTitle" value="@Model.Title" style="display:none" />
                     <input name="UserId" value="@user.UserId" style="display:none" />
-                    <input type="submit" value="Reserve" class="btn btn-success" style="margin-top: 20px" />
+                    <input type="submit" value="Reservar" class="btn btn-success" style="margin-top: 20px" />
                 </div>
             }
         </form>
@@ -50,7 +50,7 @@
         <h4>User's Information</h4>
         <form asp-action="Search" method="post">
             <div class="form-group">
-                <label for="UserId" class="control-label">User Id</label>
+                <label for="UserId" class="control-label">Matrícula SIGE</label>
                 <div style="display:flex">
                     <input name="bookId" class="form-control" style="display:none" value="@Model.BookId" />
                     <input name="userId" class="form-control" />
@@ -61,19 +61,24 @@
             @if (user != null)
             {
                 <div class="form-group">
-                    <label asp-for="@user.Name" class="control-label">User's Name</label>
+                    <label asp-for="@user.Name" class="control-label">Nome</label>
                     <input asp-for="@user!.Name" class="form-control" value="@user!.Name" readonly />
                     <span validation-for="LastDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="@user.Email" class="control-label">User's Email</label>
+                    <label asp-for="@user.Email" class="control-label">Email</label>
                     <input asp-for="@user.Email" class="form-control" readonly />
                     <span validation-for="LastDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="@user.PhoneNumber" class="control-label">User's Phone</label>
+                    <label asp-for="@user.PhoneNumber" class="control-label">Telefone</label>
                     <input asp-for="@user.PhoneNumber" class="form-control" readonly />
                     <span validation-for="LastDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@user.Class" class="control-label">Turma</label>
+                    <input asp-for="@user.Class" class="form-control" readonly />
+                    <span validation-for="Class" class="text-danger"></span>
                 </div>
                 @if (user != null && user.HasReservation)
                 {

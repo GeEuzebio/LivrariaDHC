@@ -4,22 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Borrow's Control</h1>
-<h4>Borrows already active</h4>
+<h1>Controle de Empréstimos</h1>
+<h4>Empréstimos Ativos</h4>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BookId)
+                Registro
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                Matrícula SIGE
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InitialDate!.Value.Date)
+                Data do Empréstimo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastDate!.Value.Date)
+                Data de Devolução
             </th>
         </tr>
     </thead>
@@ -43,30 +43,30 @@
                     <td>
                         @if (DateTime.Now.Date == item.LastDate)
                         {
-                            <a asp-action="Edit" asp-route-id="@item.Id"><input type="button" class="btn btn-warning" value="Renew" /></a>
+                            <a asp-action="Edit" asp-route-id="@item.Id"><input type="button" class="btn btn-warning" value="Renovar" /></a>
                         }
-                        <a asp-action="Delete" asp-route-id="@item.Id"><input type="button" class="btn btn-danger" value="Devolve" /></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id"><input type="button" class="btn btn-danger" value="Devolver" /></a>
                     </td>
                 </tr>
             }
         }
     </tbody>
 </table>
-<h4>Inactives Borrows</h4>
+<h4>Empréstimos Encerrados</h4>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BookId)
+                Registro
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                Matrícula SIGE
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InitialDate!.Value.Date)
+                Data do Empréstimo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastDate!.Value.Date)
+                Data de Devolução
             </th>
         </tr>
     </thead>

@@ -4,30 +4,40 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Finalizar Empréstimo</h1>
-
-<h3>Deseja finalizar esse empréstimo?</h3>
+<h3>Deseja dar baixa nesse empréstimo?</h3>
 <div>
-    <h4>Borrow</h4>
+    <h4>Detalhes do Empréstimo</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            Data Inicial
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserId)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InitialDate)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookId)
         </dd>
         <dt class = "col-sm-2">
-            Data Final
+            @Html.DisplayNameFor(model => model.InitialDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastDate)
+            @Html.DisplayFor(model => model.InitialDate!.Value.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastDate!.Value.Date)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Finalizar" class="btn btn-danger" /> |
-        <a asp-action="Index"><input type="button" class="btn btn-dark" value="< Retornar aos Empréstimos" /></a>
+        <input type="submit" value="Devolver" class="btn btn-danger" /> |
+        <a asp-action="Index"><input type="button" class="btn btn-dark" value="< Retornar aos empréstimos" /></a>
     </form>
 </div>

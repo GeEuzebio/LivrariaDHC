@@ -51,7 +51,7 @@ namespace LibraryApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ViewReservation(long id)
+        public async Task<IActionResult> ViewReservation(string id)
         {
             Reservation? reservation = await _context.Reservation.FirstOrDefaultAsync(r => r.BookId == id);
             long? reservationId = reservation!.Id;
@@ -59,7 +59,7 @@ namespace LibraryApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Devolve(long id)
+        public async Task<IActionResult> Devolve(string id)
         {
             Borrow? borrow = await _context.Borrow.FirstOrDefaultAsync(b => b.BookId == id);
             return _signInResult.IsSignedIn(User) ? Redirect($"/Borrows/Delete/{borrow!.Id}") : Redirect("/Home");

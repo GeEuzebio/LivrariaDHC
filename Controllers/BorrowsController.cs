@@ -27,9 +27,9 @@ namespace LibraryApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(long bookId, string userId)
+        public async Task<IActionResult> Search(string bookId, string userId)
         {
-            var book = await _context.Book.FirstOrDefaultAsync(b => b.BookId == bookId);
+            var book = await _context.Book.FirstOrDefaultAsync(b => b.Register == bookId);
             book!.UserId = userId;
             _context.Update(book);
             return RedirectToAction(nameof(Create), book);
@@ -49,7 +49,7 @@ namespace LibraryApp.Controllers
         }
 
         // GET: Borrows/Details/5
-        public async Task<IActionResult> Details(long? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
@@ -57,7 +57,7 @@ namespace LibraryApp.Controllers
             }
 
             var borrow = await _context.Borrow
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.BookId == id);
             if (borrow == null)
             {
                 return NotFound();
@@ -69,7 +69,6 @@ namespace LibraryApp.Controllers
         // GET: Borrows/Create
         public async Task<IActionResult> Create(Book b)
         {
-            //corrigir a busca pelo SIGE e não pelo ID
             User? user = await _context.User.FirstOrDefaultAsync(u => u.SIGE == b.UserId);
             ViewBag.UserData = user;
             return _signInManager.IsSignedIn(User) ? View(b) : Redirect("/Home");
@@ -80,7 +79,7 @@ namespace LibraryApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateBorrow(long UserId, long BookId, string BookTitle, DateTime InitialDate, DateTime LastDate)
+        public async Task<IActionResult> CreateBorrow(string UserId, string BookId, string BookTitle, DateTime InitialDate, DateTime LastDate)
         {
             if (ModelState.IsValid)
             {
@@ -97,20 +96,21 @@ namespace LibraryApp.Controllers
                     PrivateKey = privateKey
                 };
                 _context.Borrow.Add(borrow);
-                Book? book = await _context.Book.FirstOrDefaultAsync(b => b.BookId == BookId);
+                Book? book = await _context.Book.FirstOrDefaultAsync(b => b.Register == BookId);
                 book!.Status = Status.Borrowed;
-                if(book.Reserved == Status.Reserved)
+                if (book.Reserved == Status.Reserved)
                 {
                     book!.Reserved = Status.Available;
                     Reservation? reservation = await _context.Reservation.FirstOrDefaultAsync(r => r.BookId == BookId);
                     _context.Reservation.Remove(reservation!);
                 }
                 _context.Book.Update(book);
-                User? user = await _context.User.FirstOrDefaultAsync(u => long.Parse(u.SIGE!) == UserId);
+                string Id = UserId.ToString();
+                User? user = await _context.User.FirstOrDefaultAsync(u => u.SIGE == Id);
                 user!.HasBorrow = true;
                 _context.User.Update(user);
                 await _context.SaveChangesAsync();
-                string message = $"*Biblioteca Dom Hélder Câmara*" +
+                string message = $"*Biblioteca Waldemar Falcão*" +
                     $"\\u000A\\u000AInformações do Empréstimo:" +
                     $"\\u000ALivro: {book.Title}" +
                     $"\\u000AAutor: {book.Author}" +
@@ -209,12 +209,12 @@ namespace LibraryApp.Controllers
                 borrow!.IsDevolved = true;
                 borrow!.PrivateKey = privateKey;
                 borrow!.PublicKey = publicKey;
-                Book? book = await _context.Book.FirstOrDefaultAsync(b => b.BookId == borrow.BookId);
+                Book? book = await _context.Book.FirstOrDefaultAsync(b => b.Register == borrow.BookId);
                 book!.Status = Status.Available;
-                User? user = await _context.User.FirstOrDefaultAsync(u => u.UserId == borrow.UserId);
+                User? user = await _context.User.FirstOrDefaultAsync(u => u.SIGE == borrow.UserId);
                 user!.HasBorrow = false;
                 _context.Book.Update(book);
-                string message = $"*Biblioteca Dom Hélder Câmara*" +
+                string message = $"*Biblioteca Waldemar Falcão*" +
                     $"\\u000A\\u000AInformações do Empréstimo:" +
                     $"\\u000ALivro: {book.Title}" +
                     $"\\u000AAutor: {book.Author}" +
@@ -230,13 +230,13 @@ namespace LibraryApp.Controllers
 
         public async Task<IActionResult> Reserve(long? Id)
         {
-            if(Id == null)
+            if (Id == null)
             {
                 return _signInManager.IsSignedIn(User) ? NotFound() : Redirect("/Home");
             }
 
             Book? book = await _context.Book.FirstOrDefaultAsync(b => b.BookId == Id);
-            if(book == null)
+            if (book == null)
             {
                 return _signInManager.IsSignedIn(User) ? NotFound() : Redirect("/Home");
             }

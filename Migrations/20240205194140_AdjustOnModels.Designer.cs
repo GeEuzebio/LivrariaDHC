@@ -4,6 +4,7 @@ using LibraryApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240205194140_AdjustOnModels")]
+    partial class AdjustOnModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,8 +39,8 @@ namespace LibraryApp.Migrations
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Register")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("Register")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Reserved")
                         .HasColumnType("int");
@@ -64,8 +67,8 @@ namespace LibraryApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("BookId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("BookId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("InitialDate")
                         .HasColumnType("datetime2");
@@ -82,8 +85,8 @@ namespace LibraryApp.Migrations
                     b.Property<string>("PublicKey")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -126,8 +129,8 @@ namespace LibraryApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("BookId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("BookId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("InitialDate")
                         .HasColumnType("datetime2");
@@ -135,8 +138,8 @@ namespace LibraryApp.Migrations
                     b.Property<DateTime?>("LastDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

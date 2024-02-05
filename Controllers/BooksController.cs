@@ -29,7 +29,7 @@ namespace LibraryApp.Controllers
         }
 
         // GET: Books/Details/5
-        public async Task<IActionResult> Details(long? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
@@ -37,7 +37,7 @@ namespace LibraryApp.Controllers
             }
 
             var book = await _context.Book
-                .FirstOrDefaultAsync(m => m.BookId == id);
+                .FirstOrDefaultAsync(m => m.Register == id);
             if (book == null)
             {
                 return _signInManager.IsSignedIn(User) ? NotFound() : Redirect("/Home");
